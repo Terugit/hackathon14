@@ -17,9 +17,9 @@ func init() {
 	mysqlHost := os.Getenv("MYSQL_HOST")
 	mysqlDatabase := os.Getenv("MYSQL_DATABASE") //"test_database"
 
-	//mysqlUser = "test_user"
-	//mysqlPwd = "password"
-	//mysqlDatabase = "test_database"
+	mysqlUser = "test_user"
+	mysqlPwd = "password"
+	mysqlDatabase = "test_database"
 
 	connStr := fmt.Sprintf("%s:%s@%s/%s", mysqlUser, mysqlPwd, mysqlHost, mysqlDatabase)
 	_db, err := sql.Open("mysql", connStr)
