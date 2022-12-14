@@ -5,7 +5,7 @@ import (
 	"back/model"
 )
 
-func EditUser(user model.User) error {
+func UserEdit(user model.User) error {
 	id := user.Id
 	name := user.Name
 

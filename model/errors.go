@@ -5,7 +5,7 @@ import "errors"
 var (
 	EmptySearchName       = errors.New("search name's empty")
 	IncorrectRegisterName = errors.New("register name is not correct")
-	FailGenID             = errors.New("fail to build id")
+	FailIdGenerate        = errors.New("fail to build id")
 	EmptyId               = errors.New("id empty")
 	EmptyName             = errors.New("name empty")
 	EmptyMessage          = errors.New("message empty")

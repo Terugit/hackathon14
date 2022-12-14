@@ -10,134 +10,120 @@ import (
 	"syscall"
 )
 
-//func handler(w http.ResponseWriter, r *http.Request) {
-//	w.Header().Set("Access-Control-Allow-Headers", "*")
-//	w.Header().Set("Access-Control-Allow-Origin", "*")
-//	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-//	switch r.Method {
-//	case http.MethodGet:
-//		controller.SearchControl(w, r)
-//		//controller.FromUserCont(w, r)
-//		//controller.ToUserCont(w, r)
-//	//case http.MethodPost:
-//	//controller.RegisterControl(w, r)
-//	case http.MethodOptions:
-//		return
-//	default:
-//		log.Printf("fail: HTTP Method is %s\n", r.Method)
-//		w.WriteHeader(http.StatusBadRequest)
-//		return
-//	}
-//}
-//
-//func handlerCont(w http.ResponseWriter, r *http.Request) {
-//	w.Header().Set("Access-Control-Allow-Headers", "*")
-//	w.Header().Set("Access-Control-Allow-Origin", "*")
-//	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-//	switch r.Method {
-//	case http.MethodGet:
-//		controller.ShowAllCont(w, r)
-//	case http.MethodPost:
-//		controller.RegisterCont(w, r)
-//	case http.MethodOptions:
-//		return
-//	default:
-//		log.Printf("fail: HTTP Method is %s\n", r.Method)
-//		w.WriteHeader(http.StatusBadRequest)
-//		return
-//	}
-//}
-//
-//func handlerFromCont(w http.ResponseWriter, r *http.Request) {
-//	w.Header().Set("Access-Control-Allow-Headers", "*")
-//	w.Header().Set("Access-Control-Allow-Origin", "*")
-//	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-//	switch r.Method {
-//	case http.MethodGet:
-//		controller.FromUserCont(w, r)
-//	//case http.MethodPost:
-//	//	controller.RegisterCont(w, r)
-//	case http.MethodOptions:
-//		return
-//	default:
-//		log.Printf("fail: HTTP Method is %s\n", r.Method)
-//		w.WriteHeader(http.StatusBadRequest)
-//		return
-//	}
-//}
-//
-//func handlerToCont(w http.ResponseWriter, r *http.Request) {
-//	w.Header().Set("Access-Control-Allow-Headers", "*")
-//	w.Header().Set("Access-Control-Allow-Origin", "*")
-//	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-//	switch r.Method {
-//	case http.MethodGet:
-//		controller.ToUserCont(w, r)
-//	//case http.MethodPost:
-//	//	controller.RegisterCont(w, r)
-//	case http.MethodOptions:
-//		return
-//	default:
-//		log.Printf("fail: HTTP Method is %s\n", r.Method)
-//		w.WriteHeader(http.StatusBadRequest)
-//		return
-//	}
-//}
-//
-//func handlerContEdit(w http.ResponseWriter, r *http.Request) {
-//	w.Header().Set("Access-Control-Allow-Headers", "*")
-//	w.Header().Set("Access-Control-Allow-Origin", "*")
-//	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-//	switch r.Method {
-//	//case http.MethodGet:
-//	//controller.EditCont(w, r)
-//	case http.MethodPost:
-//		controller.EditCont(w, r)
-//	case http.MethodOptions:
-//		return
-//	default:
-//		log.Printf("fail: HTTP Method is %s\n", r.Method)
-//		w.WriteHeader(http.StatusBadRequest)
-//		return
-//	}
-//}
-//
-//func handlerContDelete(w http.ResponseWriter, r *http.Request) {
-//	w.Header().Set("Access-Control-Allow-Headers", "*")
-//	w.Header().Set("Access-Control-Allow-Origin", "*")
-//	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-//	switch r.Method {
-//	//case http.MethodGet:
-//	//controller.EditCont(w, r)
-//	case http.MethodPost:
-//		controller.DeleteCont(w, r)
-//	case http.MethodOptions:
-//		return
-//	default:
-//		log.Printf("fail: HTTP Method is %s\n", r.Method)
-//		w.WriteHeader(http.StatusBadRequest)
-//		return
-//	}
-//}
-//func handlerRanking(w http.ResponseWriter, r *http.Request) {
-//	w.Header().Set("Access-Control-Allow-Headers", "*")
-//	w.Header().Set("Access-Control-Allow-Origin", "*")
-//	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-//	switch r.Method {
-//	case http.MethodGet:
-//		controller.Ranking(w, r)
-//	//case http.MethodPost:
-//	//	controller.RegisterCont(w, r)
-//	case http.MethodOptions:
-//		return
-//	default:
-//		log.Printf("fail: HTTP Method is %s\n", r.Method)
-//		w.WriteHeader(http.StatusBadRequest)
-//		return
-//	}
-//}
+func handlerUser(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	switch r.Method {
+	case http.MethodGet:
+		controller.UserFetch(w, r)
+	case http.MethodOptions:
+		return
+	default:
+		log.Printf("fail: HTTP Method is %s\n", r.Method)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+}
 
-func handlerEditMember(w http.ResponseWriter, r *http.Request) {
+func handlerMain(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	switch r.Method {
+	case http.MethodGet:
+		controller.FetchAllThanks(w, r)
+	case http.MethodPost:
+		controller.ThankAdd(w, r)
+	case http.MethodOptions:
+		return
+	default:
+		log.Printf("fail: HTTP Method is %s\n", r.Method)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+}
+
+func handlerThanksGot(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	switch r.Method {
+	case http.MethodGet:
+		controller.FetchThanksGot(w, r)
+	case http.MethodOptions:
+		return
+	default:
+		log.Printf("fail: HTTP Method is %s\n", r.Method)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+}
+
+func handlerThanksSent(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	switch r.Method {
+	case http.MethodGet:
+		controller.FetchThanksSent(w, r)
+	case http.MethodOptions:
+		return
+	default:
+		log.Printf("fail: HTTP Method is %s\n", r.Method)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+}
+
+func handlerThankEdit(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	switch r.Method {
+	case http.MethodPost:
+		controller.ThankEdit(w, r)
+	case http.MethodOptions:
+		return
+	default:
+		log.Printf("fail: HTTP Method is %s\n", r.Method)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+}
+
+func handlerThankDel(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	switch r.Method {
+	case http.MethodPost:
+		controller.ThankDel(w, r)
+	case http.MethodOptions:
+		return
+	default:
+		log.Printf("fail: HTTP Method is %s\n", r.Method)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+}
+func handlerRanking(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	switch r.Method {
+	case http.MethodGet:
+		controller.Ranking(w, r)
+	case http.MethodOptions:
+		return
+	default:
+		log.Printf("fail: HTTP Method is %s\n", r.Method)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+}
+
+func handlerUserEdit(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -152,7 +138,7 @@ func handlerEditMember(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-func handlerRegisterMember(w http.ResponseWriter, r *http.Request) {
+func handlerUserAdd(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -170,15 +156,15 @@ func handlerRegisterMember(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	log.Println("main start")
-	//http.HandleFunc("/user", handler)
-	//http.HandleFunc("/home", handlerCont)
-	//http.HandleFunc("/fromcont", handlerFromCont)
-	//http.HandleFunc("/tocont", handlerToCont)
-	//http.HandleFunc("/edit", handlerContEdit)
-	//http.HandleFunc("/delete", handlerContDelete)
-	//http.HandleFunc("/ranking", handlerRanking)
-	http.HandleFunc("/edit/user", handlerEditMember)
-	http.HandleFunc("/add/user", handlerRegisterMember)
+	http.HandleFunc("/user", handlerUser)
+	http.HandleFunc("/main", handlerMain)
+	http.HandleFunc("/user/thanks/got", handlerThanksGot)
+	http.HandleFunc("/user/thanks/sent", handlerThanksSent)
+	http.HandleFunc("/thank/edit", handlerThankEdit)
+	http.HandleFunc("/thank/delete", handlerThankDel)
+	http.HandleFunc("/ranking", handlerRanking)
+	http.HandleFunc("/user/edit", handlerUserEdit)
+	http.HandleFunc("/user/add", handlerUserAdd)
 	closeDBWithSysCall()
 	log.Println("Listening...")
 	if err := http.ListenAndServe(":8080", nil); err != nil {

@@ -16,7 +16,7 @@ func UserEdit(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err := usecase.EditUser(user)
+	err := usecase.UserEdit(user)
 	if err != nil {
 		switch err {
 		case model.EmptyId:
