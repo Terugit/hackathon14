@@ -126,7 +126,7 @@ func FetchAllThanks() (thanks []model.Thank, error error) {
 	return thanks, nil
 }
 
-func FetchThanksSent(id string) (thanks []model.Thank, error error) {
+func FetchThanksGot(id string) (thanks []model.Thank, error error) {
 	rows, err := Db.Query("SELECT id, from_, to_, point, message, postAt, editAt FROM thanks WHERE from_ =?", id)
 	if err != nil {
 		log.Printf("fail: db.Query, %v\n", err)
@@ -169,7 +169,7 @@ func FetchThanksSent(id string) (thanks []model.Thank, error error) {
 	return thanks, nil
 }
 
-func FetchThanksGot(id string) (thanks []model.Thank, error error) {
+func FetchThanksSent(id string) (thanks []model.Thank, error error) {
 	rows, err := Db.Query("SELECT id, from_, to_, point, message, postAt, editAt FROM thanks WHERE to_ =?", id)
 	if err != nil {
 		log.Printf("fail: db.Query, %v\n", err)

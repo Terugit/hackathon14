@@ -25,7 +25,6 @@ func handlerUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-
 func handlerMain(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -43,7 +42,6 @@ func handlerMain(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-
 func handlerThanksGot(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -59,7 +57,6 @@ func handlerThanksGot(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-
 func handlerThanksSent(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -75,7 +72,6 @@ func handlerThanksSent(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-
 func handlerThankEdit(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -91,7 +87,6 @@ func handlerThankEdit(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-
 func handlerThankDel(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -122,7 +117,6 @@ func handlerRanking(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-
 func handlerUserEdit(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
