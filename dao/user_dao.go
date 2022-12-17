@@ -32,12 +32,11 @@ func UserAdd(id string, name string) error {
 		log.Printf("fail: db.Begin, %v\n", err)
 		return err
 	}
-	if _, err := tx.Exec("INSERT INTO  'public'.'users'  (id, name, point) VALUES (?,?,0) ", id, name)
-	err != nil{
-		log.Printf("fail: tx.Exec(), %v\n", err),
-		if err := tx.Rollback(); err != nil{
-		log.Printf("fail: tx.Rollback(), %v\n", err)
-	}
+	if _, err := tx.Exec("INSERT INTO  'public'.'users'  (id, name, point) VALUES (?,?,0) ", id, name); err != nil {
+		log.Printf("fail: tx.Exec(), %v\n", err)
+		if err := tx.Rollback(); err != nil {
+			log.Printf("fail: tx.Rollback(), %v\n", err)
+		}
 		return err
 	}
 	if err := tx.Commit(); err != nil {
@@ -52,12 +51,11 @@ func UserEdit(id string, name string) error {
 		log.Printf("fail: db.Begin, %v\n", err)
 		return err
 	}
-	if _, err := tx.Exec("UPDATE  'public'.'users'  SET name =? WHERE id=? ", name, id)
-	err != nil{
-		log.Printf("fail: tx.Exec(), %v\n", err),
-		if err := tx.Rollback(); err != nil{
-		log.Printf("fail: tx.Rollback(), %v\n", err)
-	}
+	if _, err := tx.Exec("UPDATE  'public'.'users'  SET name =? WHERE id=? ", name, id); err != nil {
+		log.Printf("fail: tx.Exec(), %v\n", err)
+		if err := tx.Rollback(); err != nil {
+			log.Printf("fail: tx.Rollback(), %v\n", err)
+		}
 		return err
 	}
 	if err := tx.Commit(); err != nil {
@@ -93,11 +91,7 @@ func FetchUser(id string) (users []model.User, error error) {
 		}
 	}
 	if id != "all" {
-		rows, err := Db.Query("SELECT id, name, point FROM "
-		public
-		"."
-		users
-		" WHERE id=? ", id)
+		rows, err := Db.Query("SELECT id, name, point FROM 'public'.'users' WHERE id=? ", id)
 		if err != nil {
 			log.Printf("fail: db.Query, %v\n", err)
 			return nil, err
@@ -126,11 +120,7 @@ func FetchUser(id string) (users []model.User, error error) {
 
 // UserRank ポイント高い順
 func UserRank() (users []model.UserRank, error error) {
-	rows, err := Db.Query("SELECT id, name, point FROM "
-	public
-	"."
-	users
-	" ORDER BY point DESC")
+	rows, err := Db.Query("SELECT id, name, point FROM 'public'.'users' ORDER BY point DESC")
 	if err != nil {
 		log.Printf("fail: db.Query, %v\n", err)
 		return nil, err
@@ -156,11 +146,7 @@ func UserRank() (users []model.UserRank, error error) {
 
 // SearchUser idからメンバー検索
 func SearchUser(id string) (user model.User, error error) {
-	rows, err := Db.Query("SELECT id, name, point FROM "
-	public
-	"."
-	users
-	" WHERE id =?", id)
+	rows, err := Db.Query("SELECT id, name, point FROM 'public'.'users' WHERE id =?", id)
 	if err != nil {
 		log.Printf("fail: db.Query, %v\n", err)
 		return model.User{}, err

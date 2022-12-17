@@ -19,12 +19,11 @@ func ThankAdd(id string, from_ string, to_ string, point int, message string, po
 		}
 		return err
 	}
-	if _, err := tx.Exec("UPDATE  'public'.'users'  SET point =point+? WHERE id=? ", point, to_)
-	err != nil{
-		log.Printf("fail: tx.Exec(), %v\n", err),
-		if err := tx.Rollback(); err != nil{
-		log.Printf("fail: tx.Rollback(), %v\n", err)
-	}
+	if _, err := tx.Exec("UPDATE  'public'.'users'  SET point =point+? WHERE id=? ", point, to_); err != nil {
+		log.Printf("fail: tx.Exec(), %v\n", err)
+		if err := tx.Rollback(); err != nil {
+			log.Printf("fail: tx.Rollback(), %v\n", err)
+		}
 		return err
 	}
 	if err := tx.Commit(); err != nil {
@@ -47,12 +46,11 @@ func ThankEdit(id string, to_ string, add_point int, delete_point int, message s
 		}
 		return err
 	}
-	if _, err := tx.Exec("UPDATE  'public'.'users'  SET point =point+? WHERE id=? ", add_point - delete_point, to_)
-	err != nil{
-		log.Printf("fail: tx.Exec(), %v\n", err),
-		if err := tx.Rollback(); err != nil{
-		log.Printf("fail: tx.Rollback(), %v\n", err)
-	}
+	if _, err := tx.Exec("UPDATE  'public'.'users'  SET point =point+? WHERE id=? ", add_point-delete_point, to_); err != nil {
+		log.Printf("fail: tx.Exec(), %v\n", err)
+		if err := tx.Rollback(); err != nil {
+			log.Printf("fail: tx.Rollback(), %v\n", err)
+		}
 		return err
 	}
 	if err := tx.Commit(); err != nil {
@@ -75,12 +73,11 @@ func ThankDelete(id string, to_ string, point int) error {
 		}
 		return err
 	}
-	if _, err := tx.Exec("UPDATE  'public'.'users'  SET point = point-? WHERE id=?", point, to_)
-	err != nil{
-		log.Printf("fail: tx.Exec(), %v\n", err),
-		if err := tx.Rollback(); err != nil{
-		log.Printf("fail: tx.Rollback(), %v\n", err)
-	}
+	if _, err := tx.Exec("UPDATE  'public'.'users'  SET point = point-? WHERE id=?", point, to_); err != nil {
+		log.Printf("fail: tx.Exec(), %v\n", err)
+		if err := tx.Rollback(); err != nil {
+			log.Printf("fail: tx.Rollback(), %v\n", err)
+		}
 		return err
 	}
 	if err := tx.Commit(); err != nil {
