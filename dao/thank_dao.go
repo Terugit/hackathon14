@@ -12,18 +12,22 @@ func ThankAdd(id string, from_ string, to_ string, point int, message string, po
 		return err
 	}
 	//time := time.Now()
-	if _, err := tx.Exec("INSERT INTO thanks (id, from_, to_, point, message, postAt, editAt) VALUES (?,?,?,?,?,?,?)", id, from_, to_, point, message, postAt, editAt); err != nil {
+	if _, err := tx.Exec("INSERT INTO "public"."thanks" (id, from_, to_, point, message, postAt, editAt) VALUES (?,?,?,?,?,?,?)", id, from_, to_, point, message, postAt, editAt); err != nil {
 		log.Printf("fail: tx.Exec(), %v\n", err)
 		if err := tx.Rollback(); err != nil {
 			log.Printf("fail: tx.Rollback(), %v\n", err)
 		}
 		return err
 	}
-	if _, err := tx.Exec("UPDATE users SET point =point+? WHERE id=? ", point, to_); err != nil {
-		log.Printf("fail: tx.Exec(), %v\n", err)
-		if err := tx.Rollback(); err != nil {
-			log.Printf("fail: tx.Rollback(), %v\n", err)
-		}
+	if _, err := tx.Exec("UPDATE "public
+	"."
+	users
+	" SET point =point+? WHERE id=? ", point, to_)
+	err != nil{
+		log.Printf("fail: tx.Exec(), %v\n", err),
+		if err := tx.Rollback(); err != nil{
+		log.Printf("fail: tx.Rollback(), %v\n", err)
+	}
 		return err
 	}
 	if err := tx.Commit(); err != nil {
@@ -39,18 +43,22 @@ func ThankEdit(id string, to_ string, add_point int, delete_point int, message s
 		log.Printf("fail: db.Begin, %v\n", err)
 		return err
 	}
-	if _, err := tx.Exec("UPDATE thanks SET to_=?, point=?, message=?,editAt=? WHERE id=? ", to_, add_point, message, editAt, id); err != nil {
+	if _, err := tx.Exec("UPDATE "public"."thanks" SET to_=?, point=?, message=?,editAt=? WHERE id=? ", to_, add_point, message, editAt, id); err != nil {
 		log.Printf("fail: tx.Exec(), %v\n", err)
 		if err := tx.Rollback(); err != nil {
 			log.Printf("fail: tx.Rollback(), %v\n", err)
 		}
 		return err
 	}
-	if _, err := tx.Exec("UPDATE users SET point =point+? WHERE id=? ", add_point-delete_point, to_); err != nil {
-		log.Printf("fail: tx.Exec(), %v\n", err)
-		if err := tx.Rollback(); err != nil {
-			log.Printf("fail: tx.Rollback(), %v\n", err)
-		}
+	if _, err := tx.Exec("UPDATE "public
+	"."
+	users
+	" SET point =point+? WHERE id=? ", add_point - delete_point, to_)
+	err != nil{
+		log.Printf("fail: tx.Exec(), %v\n", err),
+		if err := tx.Rollback(); err != nil{
+		log.Printf("fail: tx.Rollback(), %v\n", err)
+	}
 		return err
 	}
 	if err := tx.Commit(); err != nil {
@@ -66,18 +74,22 @@ func ThankDelete(id string, to_ string, point int) error {
 		log.Printf("fail: db.Begin, %v\n", err)
 		return err
 	}
-	if _, err := tx.Exec("DELETE FROM thanks WHERE id=?  ", id); err != nil {
+	if _, err := tx.Exec("DELETE FROM "public"."thanks" WHERE id=?  ", id); err != nil {
 		log.Printf("fail: tx.Exec(), %v\n", err)
 		if err := tx.Rollback(); err != nil {
 			log.Printf("fail: tx.Rollback(), %v\n", err)
 		}
 		return err
 	}
-	if _, err := tx.Exec("UPDATE users SET point = point-? WHERE id=?", point, to_); err != nil {
-		log.Printf("fail: tx.Exec(), %v\n", err)
-		if err := tx.Rollback(); err != nil {
-			log.Printf("fail: tx.Rollback(), %v\n", err)
-		}
+	if _, err := tx.Exec("UPDATE "public
+	"."
+	users
+	" SET point = point-? WHERE id=?", point, to_)
+	err != nil{
+		log.Printf("fail: tx.Exec(), %v\n", err),
+		if err := tx.Rollback(); err != nil{
+		log.Printf("fail: tx.Rollback(), %v\n", err)
+	}
 		return err
 	}
 	if err := tx.Commit(); err != nil {
@@ -127,7 +139,7 @@ func FetchAllThanks() (thanks []model.Thank, error error) {
 }
 
 func FetchThanksGot(id string) (thanks []model.Thank, error error) {
-	rows, err := Db.Query("SELECT id, from_, to_, point, message, postAt, editAt FROM thanks WHERE from_ =?", id)
+	rows, err := Db.Query("SELECT id, from_, to_, point, message, postAt, editAt FROM "public"."thanks" WHERE from_ =?", id)
 	if err != nil {
 		log.Printf("fail: db.Query, %v\n", err)
 		return nil, err
@@ -170,7 +182,7 @@ func FetchThanksGot(id string) (thanks []model.Thank, error error) {
 }
 
 func FetchThanksSent(id string) (thanks []model.Thank, error error) {
-	rows, err := Db.Query("SELECT id, from_, to_, point, message, postAt, editAt FROM thanks WHERE to_ =?", id)
+	rows, err := Db.Query("SELECT id, from_, to_, point, message, postAt, editAt FROM "public"."thanks" WHERE to_ =?", id)
 	if err != nil {
 		log.Printf("fail: db.Query, %v\n", err)
 		return nil, err
