@@ -88,7 +88,7 @@ func ThankDelete(id string, to_ string, point int) error {
 }
 
 func FetchAllThanks() (thanks []model.Thank, error error) {
-	rows, err := Db.Query("SELECT id, from_, to_, point, message, postAt, editAt FROM thanks")
+	rows, err := Db.Query("SELECT id, from_, to_, point, message, postAt, editAt FROM thanks ORDER BY id DESC")
 	if err != nil {
 		log.Printf("fail: db.Query, %v\n", err)
 		return nil, err
@@ -127,7 +127,7 @@ func FetchAllThanks() (thanks []model.Thank, error error) {
 }
 
 func FetchThanksGot(id string) (thanks []model.Thank, error error) {
-	rows, err := Db.Query("SELECT id, from_, to_, point, message, postAt, editAt FROM thanks WHERE from_ =?", id)
+	rows, err := Db.Query("SELECT id, from_, to_, point, message, postAt, editAt FROM thanks WHERE from_ =? ORDER BY id DESC", id)
 	if err != nil {
 		log.Printf("fail: db.Query, %v\n", err)
 		return nil, err
@@ -170,7 +170,7 @@ func FetchThanksGot(id string) (thanks []model.Thank, error error) {
 }
 
 func FetchThanksSent(id string) (thanks []model.Thank, error error) {
-	rows, err := Db.Query("SELECT id, from_, to_, point, message, postAt, editAt FROM thanks WHERE to_ =?", id)
+	rows, err := Db.Query("SELECT id, from_, to_, point, message, postAt, editAt FROM thanks WHERE to_ =? ORDER BY id DESC", id)
 	if err != nil {
 		log.Printf("fail: db.Query, %v\n", err)
 		return nil, err
