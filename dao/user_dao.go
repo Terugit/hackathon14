@@ -32,10 +32,7 @@ func UserAdd(id string, name string) error {
 		log.Printf("fail: db.Begin, %v\n", err)
 		return err
 	}
-	if _, err := tx.Exec("INSERT INTO "public
-	"."
-	users
-	" (id, name, point) VALUES (?,?,0) ", id, name)
+	if _, err := tx.Exec("INSERT INTO  'public'.'users'  (id, name, point) VALUES (?,?,0) ", id, name)
 	err != nil{
 		log.Printf("fail: tx.Exec(), %v\n", err),
 		if err := tx.Rollback(); err != nil{
@@ -55,10 +52,7 @@ func UserEdit(id string, name string) error {
 		log.Printf("fail: db.Begin, %v\n", err)
 		return err
 	}
-	if _, err := tx.Exec("UPDATE "public
-	"."
-	users
-	" SET name =? WHERE id=? ", name, id)
+	if _, err := tx.Exec("UPDATE  'public'.'users'  SET name =? WHERE id=? ", name, id)
 	err != nil{
 		log.Printf("fail: tx.Exec(), %v\n", err),
 		if err := tx.Rollback(); err != nil{
