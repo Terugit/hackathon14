@@ -2,7 +2,7 @@ package dao
 
 import (
 	"database/sql"
-	"fmt"
+	_ "github.com/lib/pq"
 	"log"
 	"os"
 )
@@ -12,17 +12,18 @@ var Db *sql.DB
 
 func init() {
 	// DB接続のための準備
-	mysqlUser := os.Getenv("MYSQL_USER") //"test_user"
-	mysqlPwd := os.Getenv("MYSQL_PWD")   // "password"
-	mysqlHost := os.Getenv("MYSQL_HOST")
-	mysqlDatabase := os.Getenv("MYSQL_DATABASE") //"test_database"
+	//mysqlUser := os.Getenv("MYSQL_USER") //"test_user"
+	//mysqlPwd := os.Getenv("MYSQL_PWD")   // "password"
+	//mysqlHost := os.Getenv("MYSQL_HOST")
+	//mysqlDatabase := os.Getenv("MYSQL_DATABASE") //"test_database"
 
 	//mysqlUser = "test_user"
 	//mysqlPwd = "password"
 	//mysqlDatabase = "test_database"
 
-	connStr := fmt.Sprintf("%s:%s@%s/%s", mysqlUser, mysqlPwd, mysqlHost, mysqlDatabase)
-	_db, err := sql.Open("mysql", connStr)
+	//connStr := fmt.Sprintf("%s:%s@%s/%s", mysqlUser, mysqlPwd, mysqlHost, mysqlDatabase)
+	dataSourceName := os.Getenv("DSN")
+	_db, err := sql.Open("postgres", dataSourceName)
 	// _db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@%s/%s", mysqlUser, mysqlPwd, mysqlHost,mysqlDatabase))
 	// _db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@(localhost:3306)/%s?parseTime=true", mysqlUser, mysqlPwd, mysqlDatabase))
 	// ①-2
